@@ -1,0 +1,7 @@
+\gradlew
+gradlew.bat
+test/
+gradle/
+*.gradle
+.idea/sonarlint
+.idea/workspace.xml

@@ -1,4 +1,4 @@
-package sounds;
+package com.remedictes.warcraft.sounds;
 
 public class SilentSound extends Sound {
     private final Listener listener;

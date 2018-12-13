@@ -1,4 +1,4 @@
-package sounds;
+package com.remedictes.warcraft.sounds;
 
 import com.intellij.openapi.diagnostic.Logger;
 

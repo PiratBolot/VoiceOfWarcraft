@@ -1,4 +1,4 @@
-package listeners;
+package com.remedictes.warcraft.listeners;
 
 import com.intellij.execution.testframework.TestsUIUtil;
 import com.intellij.notification.Notification;

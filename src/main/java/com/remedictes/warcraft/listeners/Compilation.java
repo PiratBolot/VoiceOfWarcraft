@@ -1,11 +1,9 @@
-package listeners;
+package com.remedictes.warcraft.listeners;
 
 import com.intellij.openapi.compiler.CompilationStatusListener;
 import com.intellij.openapi.compiler.CompileContext;
 import com.intellij.openapi.compiler.CompilerManager;
-import com.intellij.openapi.compiler.CompilerTopics;
 import com.intellij.openapi.project.Project;
-import com.intellij.util.messages.Topic;
 
 public class Compilation implements Restartable {
     private final Project project;

@@ -1,4 +1,4 @@
-package sounds;
+package com.remedictes.warcraft.sounds;
 
 import com.intellij.openapi.util.io.StreamUtil;
 import com.intellij.util.Function;
@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class Sounds {
+    //Sounds
 
     public static Sounds create(final boolean actionSoundsEnabled, final boolean backgroundMusicEnabled) {
         return new Sounds(config -> {
@@ -23,7 +24,7 @@ public class Sounds {
     }
 
     private Sounds(Function<Config, Sound> load) {
-//        oneUp = load.fun(new Config("/fridaymario/sounds/smb_1-up.au"));
+//        oneUp = load.fun(new Config("/fridaymario/com.remedictes.warcraft.sounds/smb_1-up.au"));
     }
 
     private static byte[] loadBytes(String fileName) {

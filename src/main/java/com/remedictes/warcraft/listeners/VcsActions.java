@@ -1,4 +1,4 @@
-package listeners;
+package com.remedictes.warcraft.listeners;
 
 import com.intellij.notification.Notification;
 import com.intellij.notification.Notifications;

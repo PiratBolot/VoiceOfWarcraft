@@ -1,0 +1,38 @@
+<idea-plugin>
+    <id>com.remedictes</id>
+    <name>Voice Of Warcraft</name>
+    <version>0.0.1</version>
+    <vendor email="remedictes@gmail.com">Yummy</vendor>
+
+    <description><![CDATA[
+    Enter short description for your plugin here.<br>
+    <em>most HTML tags may be used</em>
+    ]]></description>
+
+    <!-- see http://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <!-- see http://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <actions>
+        <action class="WarcraftVoice.IntelliJAppComponent$StartStop"
+                id="Warcraft.StartStop" text="Stop Warcraft">
+            <add-to-group anchor="last" group-id="ToolsMenu"/>
+            <keyboard-shortcut keymap="$default" first-keystroke="alt shift m"/>
+        </action>
+    </actions>
+
+    <application-components>
+        <component>
+            <implementation-class>WarcraftVoice.IntelliJAppComponent
+            </implementation-class>
+        </component>
+    </application-components>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <applicationService serviceInterface="WarcraftVoice.Settings"
+                            serviceImplementation="WarcraftVoice.Settings"/>
+        <checkinHandlerFactory implementation="WarcraftVoice.listeners.VcsActions$MyCheckinHandlerFactory"/>
+    </extensions>
+</idea-plugin>

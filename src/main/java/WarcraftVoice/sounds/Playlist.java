@@ -8,10 +8,9 @@ import org.jetbrains.annotations.NotNull;
 import java.io.*;
 
 public class Sounds {
-    public final Sound alliance;
-    public final Sound orcs;
-    public final Sound elves;
-    public final Sound scourge;
+    public final Sound background;
+
+    public final Sound open;
 
     @NotNull
     @Contract(" -> new")
@@ -26,17 +25,18 @@ public class Sounds {
     }
 
     private Sounds(Function<String, Sound> load) {
-        alliance = load.fun("/home/elvis_emplada/WarcraftVoice/src/main/java/WarcraftVoice/sounds/human.au");
-        orcs = load.fun("/home/elvis_emplada/WarcraftVoice/src/main/java/WarcraftVoice/sounds/orc.au");
-        elves = load.fun("/home/elvis_emplada/WarcraftVoice/src/main/java/WarcraftVoice/sounds/elves.au");
-        scourge = load.fun("/home/elvis_emplada/WarcraftVoice/src/main/java/WarcraftVoice/sounds/scourge.au");
+        background = load.fun("/Music/Soundtracks/pcm_human.wav");
+        orcs = load.fun("/Music/Soundtracks/pcm_orc.wav");
+        elves = load.fun("/Music/Soundtracks/pcm_elves.wav");
+        scourge = load.fun("/Music/Soundtracks/pcm_scourge.wav");
+        open = load.fun("/Music/Neutrals/Ogr/pcm_ogr_1.wav");
     }
 
     @NotNull
     private static byte[] loadBytes(String fileName) {
         try {
-            InputStream inputStream = new FileInputStream(new File(fileName));
-//            InputStream inputStream = Sounds.class.getResourceAsStream(fileName);
+            InputStream inputStream =
+                    Sounds.class.getClassLoader().getResourceAsStream(fileName);
             if (inputStream == null) throw new RuntimeException("Cannot find " + fileName);
             return StreamUtil.loadFromStream(inputStream);
         } catch (IOException e) {

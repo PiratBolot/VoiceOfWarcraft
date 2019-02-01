@@ -10,35 +10,31 @@ public class SilentSound extends Sound {
 
     @Override
     public Sound play() {
-        listener.playing(getName());
+        listener.playing(name);
         return this;
     }
 
     @Override
     public Sound playAndWait() {
-        listener.playing(getName());
+        listener.playing(name);
         return this;
     }
 
     @Override
     public Sound playInBackground() {
-        listener.playing(getName());
+        listener.playing(name);
         return this;
     }
 
     @Override
     public Sound stop() {
-        listener.stopped("stopped: " + getName());
+        listener.stopped("stopped: " + name);
         return this;
-    }
-
-    public String getName() {
-        return super.getName();
     }
 
     @Override
     public String toString() {
-        return "SilentLogSound{name='" + getName() + '\'' + '}';
+        return "SilentLogSound{name='" + name + '\'' + '}';
     }
 
     public interface Listener {

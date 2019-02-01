@@ -31,6 +31,8 @@
     </application-components>
 
     <extensions defaultExtensionNs="com.intellij">
+        <toolWindow id="ChangePlaylist" icon="/Image/gold.png" anchor="right"
+                    factoryClass="WarcraftVoice.ui.MyToolWindowFactory"/>
         <applicationService serviceInterface="WarcraftVoice.Settings"
                             serviceImplementation="WarcraftVoice.Settings"/>
         <checkinHandlerFactory implementation="WarcraftVoice.listeners.VcsActions$MyCheckinHandlerFactory"/>

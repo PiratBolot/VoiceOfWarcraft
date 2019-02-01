@@ -2,10 +2,7 @@ package WarcraftVoice.sounds;
 
 import com.intellij.openapi.diagnostic.Logger;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineListener;
+import javax.sound.sampled.*;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
@@ -15,7 +12,7 @@ public class Sound {
     private static final Logger logger = Logger.getInstance(Sound.class);
 
     private final byte[] bytes;
-    private final String name;
+    protected final String name;
     private Clip clip;
 
     public Sound(byte[] bytes, String name) {
@@ -51,6 +48,12 @@ public class Sound {
         return this;
     }
 
+    public void changeVolume(float db) {
+        FloatControl gainControl =
+                (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+        gainControl.setValue(db);
+    }
+
     /**
      * Originally copied from {@link com.intellij.util.ui.UIUtil}.
      */
@@ -73,7 +76,6 @@ public class Sound {
 
             this.clip = clip;
 
-            // The wrapper thread is unnecessary, unless it blocks on the Clip finishing;
             new Thread(() -> clip.loop(loopCount)).start();
         } catch (Exception e) {
             logger.warn(e);

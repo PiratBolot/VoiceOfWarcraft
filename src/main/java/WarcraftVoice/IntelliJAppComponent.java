@@ -1,6 +1,7 @@
 package WarcraftVoice;
 
 import WarcraftVoice.listeners.*;
+import WarcraftVoice.sounds.Race;
 import com.intellij.notification.Notification;
 import com.intellij.notification.NotificationType;
 import com.intellij.notification.Notifications;
@@ -15,7 +16,7 @@ import com.intellij.openapi.project.ProjectManagerAdapter;
 import com.intellij.openapi.project.ProjectManagerListener;
 import com.intellij.openapi.util.SystemInfo;
 import WarcraftVoice.sounds.SilentSound;
-import WarcraftVoice.sounds.Sounds;
+import WarcraftVoice.sounds.Playlist;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.HashMap;
@@ -49,8 +50,13 @@ public class IntelliJAppComponent implements ApplicationComponent {
         dispose();
     }
 
+    public void changePlaylist(Race race) {
+        soundPlayer.changePlaylist(race);
+    }
+
     public void init() {
-        soundPlayer = new ActionListeningSoundPlayer(createSounds(), createLoggingListener()).init();
+        soundPlayer =
+                new ActionListeningSoundPlayer(createSounds(Race.ORC), createLoggingListener()).init();
         initApplicationListeners();
         initProjectListeners();
 
@@ -165,9 +171,9 @@ public class IntelliJAppComponent implements ApplicationComponent {
         return this;
     }
 
-    private Sounds createSounds() {
+    private Playlist createSounds(Race race) {
         if (silentMode) {
-            return Sounds.createSilent(new SilentSound.Listener() {
+            return Playlist.createSilent(race, new SilentSound.Listener() {
                 @Override
                 public void playing(String soundName) {
                     show(soundName);
@@ -179,7 +185,7 @@ public class IntelliJAppComponent implements ApplicationComponent {
                 }
             });
         } else {
-            return Sounds.create();
+            return Playlist.create(race);
         }
     }
 
@@ -198,7 +204,8 @@ public class IntelliJAppComponent implements ApplicationComponent {
     private static void show(String message) {
         if (isEmptyOrSpaces(message)) return;
         String noTitle = "";
-        Notification notification = new Notification("Friday Mario", noTitle, message, NotificationType.INFORMATION);
+        Notification notification = new Notification("Voice of Warcraft", noTitle, message,
+                NotificationType.INFORMATION);
         ApplicationManager.getApplication().getMessageBus().syncPublisher(Notifications.TOPIC).notify(notification);
     }
 
@@ -227,9 +234,9 @@ public class IntelliJAppComponent implements ApplicationComponent {
 
         @Override public void update(@NotNull AnActionEvent event) {
             if (Settings.getInstance().isPluginEnabled()) {
-                event.getPresentation().setText("Stop Friday Mario");
+                event.getPresentation().setText("Stop Voice of Warcraft");
             } else {
-                event.getPresentation().setText("Start Friday Mario");
+                event.getPresentation().setText("Start Voice of Warcraft");
             }
         }
     }
